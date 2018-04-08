@@ -38,6 +38,7 @@
 
 - name: create rsync module dirs
   file:
+    state: directory
     path: "{{ item.value.path }}"
     owner: "{{ item.value.uid }}"
     group: "{{ item.value.gid }}"
