@@ -36,5 +36,12 @@
     mode: 0600
   notify: restart rsync service
 
+- name: create rsync module dirs
+  file:
+    path: "{{ item.value.path }}"
+    owner: "{{ item.value.uid }}"
+    group: "{{ item.value.gid }}"
+    mode: 0770
+  with_dict: "{{ rsync_modules }}"
 
 # vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2 smartindent nu
