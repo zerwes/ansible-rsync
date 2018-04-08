@@ -20,10 +20,10 @@ vars
 	  tmp:
 	    path: /srv/rsync/tmp/
 	    comment: rsync tmp
-	    use chroot: yes
-	    list: true
+	    use chroot: "yes"
+	    list: "true"
 	    uid: rsync
 	    gid: rsync
-	    read only: false
+	    read only: "false"
 	    auth users: tmp
 
