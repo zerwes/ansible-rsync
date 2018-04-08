@@ -8,6 +8,13 @@
     - ssh
     - rsync
 
+- name: create rsync users
+  user:
+    name: "{{ item.key }}"
+    shell: /sbin/nologin
+    home: "{{ item.value }}"
+  with_dict: "{{ rsync_users }}"
+
 - name: enable rsync service
   lineinfile:
     dest: /etc/default/rsync

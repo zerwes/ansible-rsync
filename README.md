@@ -6,6 +6,11 @@ vars
 
 	rsync_secrets_file: /etc/rsyncd.secrets
 
+	# map user: home
+	rsync_users:
+	  rsync: /srv/rsync
+
+
 	rsync_secrets:
 	  tmp: RsYnCt3mp
 
@@ -15,8 +20,8 @@ vars
 	    comment: rsync tmp
 	    use chroot: yes
 	    list: true
-	    uid: rsync-klaus
-	    gid: rsync-klaus
+	    uid: rsync
+	    gid: rsync
 	    read only: false
 	    auth users: tmp
 
