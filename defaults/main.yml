@@ -1,0 +1,22 @@
+---
+################
+# rsync server #
+################
+
+rsync_secrets_file: /etc/rsyncd.secrets
+
+rsync_secrets:
+  tmp: RsYnCt3mp
+
+rsync_modules:
+  tmp:
+    path: /srv/rsync/tmp/
+    comment: rsync tmp
+    use chroot: yes
+    list: true
+    uid: rsync-klaus
+    gid: rsync-klaus
+    read only: false
+    auth users: tmp
+
+# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2 smartindent nu

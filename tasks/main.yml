@@ -1,0 +1,33 @@
+---
+
+- name: ensure necessary packages are installed
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - ssh
+    - rsync
+
+- name: enable rsync service
+  lineinfile:
+    dest: /etc/default/rsync
+    line: RSYNC_ENABLE=true
+    regexp: "^RSYNC_ENABLE=.*"
+  notify: restart rsync service
+
+- name: create /etc/rsyncd.conf
+  template:
+    src: rsyncd.conf.j2
+    dest: /etc/rsyncd.conf
+    mode: 0644
+  notify: restart rsync service
+
+- name: create {{ rsync_secrets_file }}
+  template:
+    src: rsyncd.secrets.j2
+    dest: "{{ rsync_secrets_file }}"
+    mode: 0600
+  notify: restart rsync service
+
+
+# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2 smartindent nu

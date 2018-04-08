@@ -1,0 +1,24 @@
+# GLOBAL OPTIONS
+
+#motd file=/etc/motd
+log file=/var/log/rsyncd.log
+# for pid file, do not use /var/run/rsync.pid if
+# you are going to run rsync out of the init.d script.
+# The init.d script does its own pid file handling,
+# so omit the "pid file" line completely in that case.
+# pid file=/var/run/rsyncd.pid
+#syslog facility=daemon
+#socket options=
+timeout = 300
+
+# MODULE OPTIONS
+
+{% for modname, moddata in rsync_modules.iteritems() %}
+[{{ modname }}]
+{% for k, v in moddata.iteritems() %}
+{{ k }} = {{ v }}
+{% endfor %}
+secrets file = {{ rsync_secrets_file }}
+
+{% endfor %}
+
